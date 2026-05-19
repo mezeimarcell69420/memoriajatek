@@ -1,0 +1,43 @@
+const gameBoard = document.getElementById("gameBoard");
+
+const images = [
+  "assets/1.jpg",
+  "assets/3.jpg",
+  "assets/5.jpg",
+  "assets/7.jpg",
+  "assets/8.jpg",
+  "assets/2.png",
+  "assets/4.png",
+  "assets/9.png",
+  "assets/6.webp",
+
+];
+
+function createBoard(cards){
+  gameBoard.innerHTML = "";
+
+  cards.forEach(img => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    card.dataset.image = img;
+
+    card.innerHTML = `
+      <img src="${img}" width="100%">
+    `;
+
+    gameBoard.appendChild(card);
+  });
+}
+
+function startGame(){
+  const difficulty = 12;
+
+  let selected = images.slice(0, difficulty/2);
+
+  let cards = [...selected, ...selected];
+
+  cards.sort(() => Math.random() - 0.5);
+
+  createBoard(cards);
+}
