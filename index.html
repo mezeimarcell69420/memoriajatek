@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memóriajáték</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>🧠 Memóriajáték</h1>
+
+  <div class="menu">
+
+    <h2>Válassz képet</h2>
+
+    <div class="image-select" id="imageSelect"></div>
+
+    <div class="settings">
+
+      <select id="difficulty">
+        <option value="8">Könnyű (8 lap)</option>
+        <option value="12" selected>Közepes (12 lap)</option>
+        <option value="16">Nehéz (16 lap)</option>
+      </select>
+
+      <button onclick="startGame()">
+        Játék indítása
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="info">
+    <div>⏱ Idő: <span id="timer">0</span>s</div>
+    <div>🎯 Lépések: <span id="moves">0</span></div>
+    <div>⭐ Pont: <span id="score">0</span></div>
+  </div>
+
+  <div class="game-board" id="gameBoard"></div>
+
+  <div class="win-screen" id="winScreen">
+    🎉 Nyertél!
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

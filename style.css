@@ -1,0 +1,160 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,#1e1e2f,#252547);
+  color:white;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
+}
+
+h1{
+  margin-bottom:20px;
+  font-size:40px;
+}
+
+.menu{
+  width:100%;
+  max-width:900px;
+  background:#2f2f55;
+  padding:20px;
+  border-radius:15px;
+  margin-bottom:20px;
+}
+
+.menu h2{
+  margin-bottom:10px;
+}
+
+.image-select{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.image-option{
+  border:3px solid transparent;
+  border-radius:10px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.image-option img{
+  width:100%;
+  height:100px;
+  object-fit:cover;
+  display:block;
+}
+
+.image-option.selected{
+  border-color:gold;
+  transform:scale(1.05);
+}
+
+.settings{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+button,
+select{
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button{
+  background:gold;
+  font-weight:bold;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+.info{
+  display:flex;
+  gap:20px;
+  margin-bottom:20px;
+  font-size:20px;
+}
+
+.game-board{
+  width:100%;
+  max-width:900px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.card{
+  aspect-ratio:1/1;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:0.5s;
+  cursor:pointer;
+}
+
+.card.flip{
+  transform:rotateY(180deg);
+}
+
+.front,
+.back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:15px;
+  backface-visibility:hidden;
+}
+
+.front{
+  background:#444;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+}
+
+.back{
+  transform:rotateY(180deg);
+  overflow:hidden;
+}
+
+.back img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.win-screen{
+  display:none;
+  margin-top:20px;
+  font-size:30px;
+  color:gold;
+}
+
+@media(max-width:700px){
+
+  .game-board{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .image-select{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
