@@ -77,3 +77,41 @@ function flipCard(){
 
   secondCard = this;
 }
+
+let lock = false;
+
+function checkMatch(){
+
+  if(firstCard.dataset.image === secondCard.dataset.image){
+    firstCard.removeEventListener("click", flipCard);
+    secondCard.removeEventListener("click", flipCard);
+  } else {
+    lock = true;
+
+    setTimeout(() => {
+      firstCard.classList.remove("flip");
+      secondCard.classList.remove("flip");
+      lock = false;
+    }, 800);
+  }
+
+  firstCard = null;
+  secondCard = null;
+}
+
+function flipCard(){
+
+  if(lock) return;
+  if(this === firstCard) return;
+
+  this.classList.add("flip");
+
+  if(!firstCard){
+    firstCard = this;
+    return;
+  }
+
+  secondCard = this;
+
+  checkMatch();
+}
