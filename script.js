@@ -41,3 +41,39 @@ function startGame(){
 
   createBoard(cards);
 }
+
+let firstCard = null;
+let secondCard = null;
+
+function createBoard(cards){
+  gameBoard.innerHTML = "";
+
+  cards.forEach(img => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    card.dataset.image = img;
+
+    card.innerHTML = `
+      <div class="front">?</div>
+      <div class="back">
+        <img src="${img}">
+      </div>
+    `;
+
+    card.addEventListener("click", flipCard);
+
+    gameBoard.appendChild(card);
+  });
+}
+
+function flipCard(){
+  this.classList.add("flip");
+
+  if(!firstCard){
+    firstCard = this;
+    return;
+  }
+
+  secondCard = this;
+}
