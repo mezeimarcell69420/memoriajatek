@@ -13,23 +13,6 @@ const images = [
 
 ];
 
-function createBoard(cards){
-  gameBoard.innerHTML = "";
-
-  cards.forEach(img => {
-    const card = document.createElement("div");
-    card.classList.add("card");
-
-    card.dataset.image = img;
-
-    card.innerHTML = `
-      <img src="${img}" width="100%">
-    `;
-
-    gameBoard.appendChild(card);
-  });
-}
-
 function startGame(){
   const difficulty = 12;
 
@@ -68,6 +51,11 @@ function createBoard(cards){
 }
 
 function flipCard(){
+
+  if(lock) return;
+
+  if(this === firstCard) return;
+
   this.classList.add("flip");
 
   if(!firstCard){
@@ -76,4 +64,40 @@ function flipCard(){
   }
 
   secondCard = this;
+
+  checkMatch();
+}
+
+let lock = false;
+
+function checkMatch(){
+
+  if(firstCard.dataset.image === secondCard.dataset.image){
+
+    firstCard.removeEventListener("click", flipCard);
+    secondCard.removeEventListener("click", flipCard);
+
+    resetTurn();
+
+  } else {
+
+    lock = true;
+
+    setTimeout(() => {
+
+      firstCard.classList.remove("flip");
+      secondCard.classList.remove("flip");
+
+      resetTurn();
+
+    }, 800);
+  }
+}
+
+function resetTurn(){
+
+  firstCard = null;
+  secondCard = null;
+  lock = false;
+
 }
