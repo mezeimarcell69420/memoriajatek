@@ -51,40 +51,9 @@ function createBoard(cards){
 }
 
 function flipCard(){
-  this.classList.add("flip");
-
-  if(!firstCard){
-    firstCard = this;
-    return;
-  }
-
-  secondCard = this;
-}
-
-let lock = false;
-
-function checkMatch(){
-
-  if(firstCard.dataset.image === secondCard.dataset.image){
-    firstCard.removeEventListener("click", flipCard);
-    secondCard.removeEventListener("click", flipCard);
-  } else {
-    lock = true;
-
-    setTimeout(() => {
-      firstCard.classList.remove("flip");
-      secondCard.classList.remove("flip");
-      lock = false;
-    }, 800);
-  }
-
-  firstCard = null;
-  secondCard = null;
-}
-
-function flipCard(){
 
   if(lock) return;
+
   if(this === firstCard) return;
 
   this.classList.add("flip");
@@ -95,6 +64,57 @@ function flipCard(){
   }
 
   secondCard = this;
-
+  moves++;
   checkMatch();
+  updateUI();
 }
+
+let lock = false;
+
+function checkMatch(){
+
+  const match =
+    firstCard.dataset.image === secondCard.dataset.image;
+
+  if(match){
+
+    score += 100;
+
+    updateUI();
+
+    firstCard.removeEventListener("click", flipCard);
+    secondCard.removeEventListener("click", flipCard);
+
+    resetTurn();
+
+  } else {
+
+    lock = true;
+
+    setTimeout(() => {
+
+      firstCard.classList.remove("flip");
+      secondCard.classList.remove("flip");
+
+      resetTurn();
+
+    }, 800);
+  }
+}
+
+function resetTurn(){
+
+  firstCard = null;
+  secondCard = null;
+  lock = false;
+
+}
+
+let moves = 0;
+let score = 0;
+
+function updateUI(){
+  document.getElementById("moves").innerText = moves;
+  document.getElementById("score").innerText = score;
+}
+
