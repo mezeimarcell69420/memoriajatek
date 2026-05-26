@@ -14,6 +14,7 @@ const images = [
 ];
 
 function startGame(){
+  startTimer();
   const difficulty = 12;
 
   let selected = images.slice(0, difficulty/2);
@@ -118,3 +119,16 @@ function updateUI(){
   document.getElementById("score").innerText = score;
 }
 
+let timer = 0;
+let interval;
+
+function startTimer(){
+  clearInterval(interval);
+
+  timer = 0;
+
+  interval = setInterval(() => {
+    timer++;
+    document.getElementById("timer").innerText = timer;
+  }, 1000);
+}
